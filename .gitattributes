@@ -1,0 +1,18 @@
+* text=auto
+
+# El runner de GitHub Actions es Linux: la envoltura de Gradle debe
+# conservar finales de linea LF para que su shebang funcione.
+gradlew text eol=lf
+*.sh text eol=lf
+
+# Los scripts de Windows necesitan CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Archivos binarios que Git no debe tratar como texto.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.jar binary
+*.keystore binary
+*.ttf binary

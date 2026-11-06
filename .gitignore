@@ -1,0 +1,31 @@
+# Dependencias
+node_modules/
+
+# Secretos y entorno (NO subir nunca)
+.env
+.env.local
+*.env
+
+# Android / Gradle
+mobile/android/build/
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/local.properties
+mobile/android/.cxx/
+*.apk
+*.aab
+
+# Expo residual
+mobile/.expo/
+.expo/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
