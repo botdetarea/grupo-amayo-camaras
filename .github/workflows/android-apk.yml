@@ -34,17 +34,16 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
+      # El runner ubuntu-latest ya trae el Android SDK en $ANDROID_HOME.
+      # NO se usa android-actions/setup-android porque ejecuta "sdkmanager tools",
+      # paquete que Google eliminó y que hace fallar el job.
       - name: Install Android SDK packages
         run: |
-          yes | sdkmanager --licenses
-          sdkmanager \
-            "platform-tools" \
-            "platforms;android-36" \
-            "build-tools;36.1.0" \
-            "ndk;27.1.12297006"
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          SDKMANAGER=$(find "${ANDROID_HOME}/cmdline-tools" -name sdkmanager -type f | head -n 1)
+          echo "sdkmanager: $SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          "$SDKMANAGER" "platform-tools" "platforms;android-36" "build-tools;36.1.0" "ndk;27.1.12297006"
 
       - name: Install JavaScript dependencies
         working-directory: mobile
